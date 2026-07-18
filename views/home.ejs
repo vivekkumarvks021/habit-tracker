@@ -25,10 +25,15 @@
       <p>No Habits Found</p>
     <% } else { %>
       <ul>
-        <% habits.forEach((habit) => { %>
-          <li><%= habit.name %></li>
-        <% }); %>
-      </ul>
+
+    <% habits.forEach((habit) => { %>
+        <li>
+            <a href="/habits/<%= habit._id %>">
+                <%= habit.name %>
+            </a>
+        </li>
+    <% }) %>
+</ul>
     <% } %>
   </body>
 </html>

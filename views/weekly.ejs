@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= habit.name %></title>
+</head>
+<body>
+
+    <h1><%= habit.name %></h1>
+
+    <hr>
+
+    <% weekData.forEach((day) => { %>
+
+        <div class="habit-row">
+
+            <div class="habit-date">
+                <strong><%= day.day %></strong>
+                <p><%= day.date %></p>
+            </div>
+
+            <button
+                class="status-btn status-<%= day.status %>"
+                data-date="<%= day.fullDate %>"
+                data-status="<%= day.status %>"
+                data-original-status="<%= day.status %>">
+                <%= day.status %>
+            </button>
+
+        </div>
+
+        <hr>
+
+    <% }) %>
+
+    <button id="save-btn" disabled>
+        Save Changes
+    </button>
+
+    <script src="/js/weekly.js"></script>
+
+</body>
+</html>
