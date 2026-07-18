@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
     <title>Habit Tracker</title>
   </head>
+
   <body>
     <h1>Habit Tracker</h1>
 
-    <button>Add Habit</button>
+    <form action="/habits" method="POST">
+      <input
+        type="text"
+        name="name"
+        placeholder="Enter Habit Name"
+        required
+      />
+
+      <button type="submit">Add Habit</button>
+    </form>
+
+    <hr />
+
+    <% if (habits.length === 0) { %>
+      <p>No Habits Found</p>
+    <% } else { %>
+      <ul>
+        <% habits.forEach((habit) => { %>
+          <li><%= habit.name %></li>
+        <% }); %>
+      </ul>
+    <% } %>
   </body>
 </html>
