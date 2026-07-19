@@ -3,40 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/weekly.css">
     <title><%= habit.name %></title>
 </head>
 <body>
 
-    <h1><%= habit.name %></h1>
+    <main class="container">
 
-    <hr>
+    <header class="page-header">
 
-    <% weekData.forEach((day) => { %>
+        <a
+            class="back-btn"
+            href="/">
 
-        <div class="habit-row">
+            ← Back
 
-            <div class="habit-date">
-                <strong><%= day.day %></strong>
-                <p><%= day.date %></p>
-            </div>
+        </a>
 
-            <button
-                class="status-btn status-<%= day.status %>"
-                data-date="<%= day.fullDate %>"
-                data-status="<%= day.status %>"
-                data-original-status="<%= day.status %>">
-                <%= day.status %>
-            </button>
+        <h1 class="page-title">
+            <%= habit.name %>
+        </h1>
 
-        </div>
+        <p class="section-subtitle">
+            Last 7 Days
+        </p>
 
-        <hr>
+    </header>
 
-    <% }) %>
+    <section class="weekly-list">
 
-    <button id="save-btn" disabled>
-        Save Changes
-    </button>
+        <% weekData.forEach((day)=>{ %>
+
+            <article class="day-card">
+
+                <div class="day-details">
+
+                    <h3 class="day-name">
+                        <%= day.day %>
+                    </h3>
+
+                    <p class="day-date">
+                        <%= day.date %>
+                    </p>
+
+                </div>
+
+                <button
+                    class="status-btn status-<%= day.status %>"
+                    data-date="<%= day.fullDate %>"
+                    data-status="<%= day.status %>"
+                    data-original-status="<%= day.status %>">
+
+                    <%= day.status %>
+
+                </button>
+
+            </article>
+
+        <% }) %>
+
+    </section>
+
+    <footer class="page-footer">
+
+        <button
+            id="save-btn"
+            class="btn btn-primary"
+            disabled>
+
+            Save Changes
+
+        </button>
+
+    </footer>
+
+</main>
 
     <script src="/js/weekly.js"></script>
 

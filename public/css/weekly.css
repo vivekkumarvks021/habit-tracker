@@ -1,0 +1,112 @@
+.back-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.section-subtitle {
+  color: #666;
+  margin-top: 5px;
+}
+
+.weekly-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.day-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.day-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.day-name {
+  font-size: 18px;
+}
+
+.day-date {
+  color: #666;
+  font-size: 14px;
+}
+
+.status-btn {
+  min-width: 120px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.status-done {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+
+.status-done:hover {
+  background-color: #16a34a;
+}
+
+.status-not-done {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.status-not-done:hover {
+  background-color: #dc2626;
+}
+
+.status-none {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.status-none:hover {
+  background-color: #d1d5db;
+}
+
+.btn:disabled {
+  background-color: #cbd5e1;
+  color: #64748b;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .day-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .status-btn {
+    width: 100%;
+  }
+
+  .page-footer .btn {
+    width: 100%;
+  }
+}

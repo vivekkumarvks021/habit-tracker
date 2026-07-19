@@ -1,39 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/home.css">
     <title>Habit Tracker</title>
-  </head>
+</head>
+<body>
 
-  <body>
-    <h1>Habit Tracker</h1>
+    <main class="container">
 
-    <form action="/habits" method="POST">
-      <input
-        type="text"
-        name="name"
-        placeholder="Enter Habit Name"
-        required
-      />
+    <header class="page-header">
 
-      <button type="submit">Add Habit</button>
-    </form>
+        <h1 class="page-title">
+            Habit Tracker
+        </h1>
 
-    <hr />
+    </header>
 
-    <% if (habits.length === 0) { %>
-      <p>No Habits Found</p>
-    <% } else { %>
-      <ul>
+    <section class="add-habit-section">
 
-    <% habits.forEach((habit) => { %>
-        <li>
-            <a href="/habits/<%= habit._id %>">
-                <%= habit.name %>
-            </a>
-        </li>
-    <% }) %>
-</ul>
-    <% } %>
-  </body>
+        <h2 class="section-title">
+            Add New Habit
+        </h2>
+
+        <form
+            class="habit-form"
+            action="/habits"
+            method="POST">
+
+            <input
+                class="habit-input"
+                type="text"
+                name="name"
+                placeholder="Enter Habit Name"
+                required
+            >
+
+            <button
+                class="btn btn-primary"
+                type="submit">
+
+                Add Habit
+
+            </button>
+
+        </form>
+
+    </section>
+
+    <section class="habit-list-section">
+
+        <h2 class="section-title">
+            Your Habits
+        </h2>
+
+        <% if(habits.length === 0){ %>
+
+            <p class="empty-message">
+                No habits found.
+            </p>
+
+        <% } else { %>
+
+            <% habits.forEach((habit)=>{ %>
+
+                <article class="habit-card">
+
+                    <h3 class="habit-name">
+                        <%= habit.name %>
+                    </h3>
+
+                    <a
+                        class="btn btn-secondary"
+                        href="/habits/<%= habit._id %>">
+
+                        View Weekly
+
+                    </a>
+
+                </article>
+
+            <% }) %>
+
+        <% } %>
+
+    </section>
+
+</main>
+
+</body>
 </html>

@@ -1,0 +1,75 @@
+.add-habit-section {
+  margin-bottom: 40px;
+}
+
+.habit-form {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.habit-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.habit-input:focus {
+  border-color: #2563eb;
+}
+
+.habit-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.habit-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px;
+
+  background-color: white;
+
+  border-radius: 8px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.habit-name {
+  font-size: 20px;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+  padding: 30px;
+}
+
+@media (max-width: 768px) {
+  .habit-form {
+    flex-direction: column;
+  }
+
+  .habit-input {
+    width: 100%;
+  }
+
+  .habit-form .btn {
+    width: 100%;
+  }
+
+  .habit-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .habit-card .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
