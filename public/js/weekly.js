@@ -49,8 +49,8 @@ saveButton.addEventListener("click", async () => {
   if (Object.keys(updatedHistory).length === 0) {
     return;
   }
-
   try {
+    toggleSaveButton(true);
     const response = await fetch(`/habits/${habitId}/update-history`, {
       method: "POST",
 
@@ -68,7 +68,7 @@ saveButton.addEventListener("click", async () => {
     if (result.success) {
       // Clear updated history
       updatedHistory = {};
-
+      toggleSaveButton(false);
       // Update original status
       statusButtons.forEach((button) => {
         button.dataset.originalStatus = button.dataset.status;
@@ -77,11 +77,22 @@ saveButton.addEventListener("click", async () => {
       // Disable save button
       saveButton.disabled = true;
 
-      alert("Habit updated successfully!");
+      showNotification("Habit updated successfully!", "success");
     }
 
     console.log(result);
   } catch (error) {
     console.log(error);
+    toggleSaveButton(false);
   }
 });
+
+function toggleSaveButton(isLoading) {
+  if (isLoading) {
+    saveButton.disabled = true;
+    saveButton.textContent = "Saving...";
+  } else {
+    saveButton.textContent = "Save Changes";
+    saveButton.disabled = Object.keys(updatedHistory).length === 0;
+  }
+}

@@ -6,6 +6,8 @@ module.exports.home = async (req, res) => {
 
     return res.render("home", {
       habits,
+      success: req.query.success,
+      error: req.query.error,
     });
   } catch (error) {
     console.log(error);
@@ -17,7 +19,7 @@ module.exports.createHabit = async (req, res) => {
     const { name } = req.body;
 
     if (!name.trim()) {
-      return res.redirect("/");
+      return res.redirect("/?error=habit-required");
     }
 
     const existingHabit = await Habit.findOne({
@@ -25,14 +27,14 @@ module.exports.createHabit = async (req, res) => {
     });
 
     if (existingHabit) {
-      return res.redirect("/");
+      return res.redirect("/?error=habit-exists");
     }
 
     await Habit.create({
       name: name.trim(),
     });
 
-    return res.redirect("/");
+    return res.redirect("/?success=habit-added");
   } catch (error) {
     console.log(error);
   }

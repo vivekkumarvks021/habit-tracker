@@ -18,7 +18,7 @@
         </h1>
 
     </header>
-
+    <%- include("partials/notification") %>
     <section class="add-habit-section">
 
         <h2 class="section-title">
@@ -89,6 +89,22 @@
     </section>
 
 </main>
+<script src="/js/common.js"></script>
+<script>
+    const success = "<%= success || '' %>";
+    const error = "<%= error || '' %>";
 
+    if (success === "habit-added") {
+        showNotification("Habit added successfully!", "success");
+    }
+
+    if (error === "habit-exists") {
+        showNotification("Habit already exists!", "error");
+    }
+
+    if (error === "habit-required") {
+        showNotification("Habit name is required!", "error");
+    }
+</script>
 </body>
 </html>
