@@ -68,19 +68,34 @@
 
                 <article class="habit-card">
 
-                    <h3 class="habit-name">
-                        <%= habit.name %>
-                    </h3>
+    <h3 class="habit-name">
+        <%= habit.name %>
+    </h3>
 
-                    <a
-                        class="btn btn-secondary"
-                        href="/habits/<%= habit._id %>">
+    <div class="habit-stats">
 
-                        View Weekly
+        <p class="habit-progress">
+            ✅ <strong>Completed:</strong>
+            <%= habit.stats.completedDays %> /
+            <%= habit.stats.totalDays %> Days
+        </p>
 
-                    </a>
+        <p class="habit-streak">
+            🔥 <strong>Longest Streak:</strong>
+            <%= habit.stats.longestStreak %> Days
+        </p>
 
-                </article>
+    </div>
+
+    <a
+        class="btn btn-secondary"
+        href="/habits/<%= habit._id %>">
+
+        View Weekly
+
+    </a>
+
+</article>
 
             <% }) %>
 

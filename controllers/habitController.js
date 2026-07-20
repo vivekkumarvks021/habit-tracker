@@ -1,11 +1,20 @@
 const Habit = require("../models/Habits");
+const calculateHabitStats = require("../utils/habitStats");
 
 module.exports.home = async (req, res) => {
   try {
     const habits = await Habit.find();
+    const habitsWithStats = habits.map((habit) => {
+      const stats = calculateHabitStats(habit.history, habit.createdAt);
+
+      return {
+        ...habit.toObject(),
+        stats,
+      };
+    });
 
     return res.render("home", {
-      habits,
+      habits: habitsWithStats,
       success: req.query.success,
       error: req.query.error,
     });
@@ -43,14 +52,14 @@ module.exports.createHabit = async (req, res) => {
 module.exports.showHabit = async (req, res) => {
   try {
     const { id } = req.params;
-
+    const weekData = [];
     const habit = await Habit.findById(id);
+
+    console.log("createdDate", habit.createdAt);
 
     if (!habit) {
       return res.redirect("/");
     }
-
-    const weekData = [];
 
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date();
@@ -69,6 +78,7 @@ module.exports.showHabit = async (req, res) => {
           month: "short",
         }),
         status: habit.history[fullDate] || "none",
+        isDisabled: currentDate < habit.createdAt,
       });
     }
 

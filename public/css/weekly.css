@@ -16,7 +16,6 @@
 
 .weekly-list {
   display: flex;
-  flex-direction: column;
   gap: 15px;
 }
 
@@ -46,10 +45,9 @@
 }
 
 .status-btn {
-  min-width: 120px;
   padding: 10px 15px;
   border: none;
-  border-radius: 6px;
+  border-radius: 50%;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
@@ -62,30 +60,18 @@
 }
 
 .status-done {
-  background-color: #22c55e;
+  /* background-color: #22c55e; */
   color: #ffffff;
-}
-
-.status-done:hover {
-  background-color: #16a34a;
 }
 
 .status-not-done {
-  background-color: #ef4444;
+  /* background-color: #ef4444; */
   color: #ffffff;
 }
 
-.status-not-done:hover {
-  background-color: #dc2626;
-}
-
 .status-none {
-  background-color: #e5e7eb;
+  /* background-color: #e5e7eb; */
   color: #374151;
-}
-
-.status-none:hover {
-  background-color: #d1d5db;
 }
 
 .btn:disabled {
@@ -93,6 +79,16 @@
   color: #64748b;
   cursor: not-allowed;
   opacity: 0.8;
+}
+
+.status-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {

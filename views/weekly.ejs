@@ -50,13 +50,18 @@
                 </div>
 
                 <button
-                    class="status-btn status-<%= day.status %>"
+                    class="status-btn status-<%= day.status %> <%= day.isDisabled ? 'status-disabled' : '' %>"
                     data-date="<%= day.fullDate %>"
                     data-status="<%= day.status %>"
-                    data-original-status="<%= day.status %>">
-
-                    <%= day.status %>
-
+                    data-original-status="<%= day.status %>"
+                    <%= day.isDisabled ? "disabled" : "" %>>
+                    <% if (day.status === "done") { %>
+                            ✅
+                    <% } else if (day.status === "not-done") { %>
+                            ❌
+                    <% } else { %>
+                            ⚪
+                    <% } %>
                 </button>
 
             </article>

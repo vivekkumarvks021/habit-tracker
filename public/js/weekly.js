@@ -10,6 +10,19 @@ const statusFlow = {
   "not-done": "none",
 };
 
+function getStatusIcon(status) {
+  switch (status) {
+    case "done":
+      return "✅";
+
+    case "not-done":
+      return "❌";
+
+    default:
+      return "⚪";
+  }
+}
+
 statusButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const currentStatus = button.dataset.status;
@@ -24,7 +37,7 @@ statusButtons.forEach((button) => {
     button.dataset.status = nextStatus;
 
     // Update button text
-    button.textContent = nextStatus;
+    button.textContent = getStatusIcon(nextStatus);
 
     // Update button class
     button.classList.remove("status-none", "status-done", "status-not-done");
