@@ -60,17 +60,25 @@ module.exports.showHabit = async (req, res) => {
   try {
     const { id } = req.params;
     const weekData = [];
+
     const habit = await Habit.findById(id);
 
     if (!habit) {
       return res.redirect("/");
     }
 
+    // Normalize the habit creation date (ignore time)
+    const createdDate = new Date(habit.createdAt);
+    createdDate.setHours(0, 0, 0, 0);
+
     // Generate data for the last seven days
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date();
 
       currentDate.setDate(currentDate.getDate() - i);
+
+      // Normalize current date (ignore time)
+      currentDate.setHours(0, 0, 0, 0);
 
       const fullDate = currentDate.toISOString().split("T")[0];
 
@@ -85,8 +93,8 @@ module.exports.showHabit = async (req, res) => {
         }),
         status: habit.history[fullDate] || "none",
 
-        // Disable dates before the habit was created
-        isDisabled: currentDate < habit.createdAt,
+        // Disable only dates before the habit creation date
+        isDisabled: currentDate < createdDate,
       });
     }
 
