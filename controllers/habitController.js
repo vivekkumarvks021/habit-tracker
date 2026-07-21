@@ -80,7 +80,7 @@ module.exports.showHabit = async (req, res) => {
       // Normalize current date (ignore time)
       currentDate.setHours(0, 0, 0, 0);
 
-      const fullDate = currentDate.toISOString().split("T")[0];
+      const fullDate = formatDate(currentDate);
 
       weekData.push({
         fullDate,
@@ -145,3 +145,11 @@ module.exports.updateHistory = async (req, res) => {
     });
   }
 };
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
