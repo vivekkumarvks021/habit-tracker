@@ -3,123 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/home.css">
+
     <title>Habit Tracker</title>
 </head>
+
 <body>
 
     <main class="container">
 
-    <header class="page-header">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">
+                Habit Tracker
+            </h1>
+        </header>
 
-        <h1 class="page-title">
-            Habit Tracker
-        </h1>
+        <!-- Notification container -->
+        <%- include("partials/notification") %>
 
-    </header>
-    <%- include("partials/notification") %>
-    <section class="add-habit-section">
+        <!-- Add Habit Form -->
+        <section class="add-habit-section">
 
-        <h2 class="section-title">
-            Add New Habit
-        </h2>
+            <h2 class="section-title">
+                Add New Habit
+            </h2>
 
-        <form
-            class="habit-form"
-            action="/habits"
-            method="POST">
-
-            <input
-                class="habit-input"
-                type="text"
-                name="name"
-                placeholder="Enter Habit Name"
-                required
+            <form
+                class="habit-form"
+                action="/habits"
+                method="POST"
             >
 
-            <button
-                class="btn btn-primary"
-                type="submit">
+                <input
+                    class="habit-input"
+                    type="text"
+                    name="name"
+                    placeholder="Enter Habit Name"
+                    required
+                >
 
-                Add Habit
+                <button
+                    class="btn btn-primary"
+                    type="submit"
+                >
+                    Add Habit
+                </button>
 
-            </button>
+            </form>
 
-        </form>
+        </section>
 
-    </section>
+        <!-- Habit List -->
+        <section class="habit-list-section">
 
-    <section class="habit-list-section">
+            <h2 class="section-title">
+                Your Habits
+            </h2>
 
-        <h2 class="section-title">
-            Your Habits
-        </h2>
+            <% if (habits.length === 0) { %>
 
-        <% if(habits.length === 0){ %>
+                <p class="empty-message">
+                    No habits found.
+                </p>
 
-            <p class="empty-message">
-                No habits found.
-            </p>
+            <% } else { %>
 
-        <% } else { %>
+                <!-- Render all habits -->
+                <% habits.forEach((habit) => { %>
 
-            <% habits.forEach((habit)=>{ %>
+                    <article class="habit-card">
 
-                <article class="habit-card">
+                        <h3 class="habit-name">
+                            <%= habit.name %>
+                        </h3>
 
-    <h3 class="habit-name">
-        <%= habit.name %>
-    </h3>
+                        <!-- Habit statistics -->
+                        <div class="habit-stats">
 
-    <div class="habit-stats">
+                            <p class="habit-progress">
+                                ✅ <strong>Completed:</strong>
+                                <%= habit.stats.completedDays %> /
+                                <%= habit.stats.totalDays %> Days
+                            </p>
 
-        <p class="habit-progress">
-            ✅ <strong>Completed:</strong>
-            <%= habit.stats.completedDays %> /
-            <%= habit.stats.totalDays %> Days
-        </p>
+                            <p class="habit-streak">
+                                🔥 <strong>Longest Streak:</strong>
+                                <%= habit.stats.longestStreak %> Days
+                            </p>
 
-        <p class="habit-streak">
-            🔥 <strong>Longest Streak:</strong>
-            <%= habit.stats.longestStreak %> Days
-        </p>
+                        </div>
 
-    </div>
+                        <a
+                            class="btn btn-secondary"
+                            href="/habits/<%= habit._id %>"
+                        >
+                            View Weekly
+                        </a>
 
-    <a
-        class="btn btn-secondary"
-        href="/habits/<%= habit._id %>">
+                    </article>
 
-        View Weekly
+                <% }) %>
 
-    </a>
+            <% } %>
 
-</article>
+        </section>
 
-            <% }) %>
+    </main>
 
-        <% } %>
+    <script src="/js/common.js"></script>
 
-    </section>
+    <script>
+        const success = "<%= success || '' %>";
+        const error = "<%= error || '' %>";
 
-</main>
-<script src="/js/common.js"></script>
-<script>
-    const success = "<%= success || '' %>";
-    const error = "<%= error || '' %>";
+        // Display success notification
+        if (success === "habit-added") {
+            showNotification("Habit added successfully!", "success");
+        }
 
-    if (success === "habit-added") {
-        showNotification("Habit added successfully!", "success");
-    }
+        // Display duplicate habit error
+        if (error === "habit-exists") {
+            showNotification("Habit already exists!", "error");
+        }
 
-    if (error === "habit-exists") {
-        showNotification("Habit already exists!", "error");
-    }
+        // Display validation error for empty habit name
+        if (error === "habit-required") {
+            showNotification("Habit name is required!", "error");
+        }
+    </script>
 
-    if (error === "habit-required") {
-        showNotification("Habit name is required!", "error");
-    }
-</script>
 </body>
 </html>

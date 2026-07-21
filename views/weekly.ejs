@@ -1,91 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/weekly.css">
+
     <title><%= habit.name %></title>
 </head>
+
 <body>
 
     <main class="container">
 
-    <header class="page-header">
+        <!-- Page Header -->
+        <header class="page-header">
 
-        <a
-            class="back-btn"
-            href="/">
+            <a
+                class="back-btn"
+                href="/"
+            >
+                ← Back
+            </a>
 
-            ← Back
+            <h1 class="page-title">
+                <%= habit.name %>
+            </h1>
 
-        </a>
+            <p class="section-subtitle">
+                Last 7 Days
+            </p>
 
-        <h1 class="page-title">
-            <%= habit.name %>
-        </h1>
+        </header>
 
-        <p class="section-subtitle">
-            Last 7 Days
-        </p>
+        <!-- Notification container -->
+        <%- include("partials/notification") %>
 
-    </header>
-    <%- include("partials/notification") %>
-    <section class="weekly-list">
+        <!-- Weekly habit tracking list -->
+        <section class="weekly-list">
 
-        <% weekData.forEach((day)=>{ %>
+            <!-- Render the last 7 days -->
+            <% weekData.forEach((day) => { %>
 
-            <article class="day-card">
+                <article class="day-card">
 
-                <div class="day-details">
+                    <div class="day-details">
 
-                    <h3 class="day-name">
-                        <%= day.day %>
-                    </h3>
+                        <h3 class="day-name">
+                            <%= day.day %>
+                        </h3>
 
-                    <p class="day-date">
-                        <%= day.date %>
-                    </p>
+                        <p class="day-date">
+                            <%= day.date %>
+                        </p>
 
-                </div>
+                    </div>
 
-                <button
-                    class="status-btn status-<%= day.status %> <%= day.isDisabled ? 'status-disabled' : '' %>"
-                    data-date="<%= day.fullDate %>"
-                    data-status="<%= day.status %>"
-                    data-original-status="<%= day.status %>"
-                    <%= day.isDisabled ? "disabled" : "" %>>
-                    <% if (day.status === "done") { %>
+                    <!-- Status button for the selected day -->
+                    <button
+                        class="status-btn status-<%= day.status %> <%= day.isDisabled ? 'status-disabled' : '' %>"
+                        data-date="<%= day.fullDate %>"
+                        data-status="<%= day.status %>"
+                        data-original-status="<%= day.status %>"
+                        <%= day.isDisabled ? "disabled" : "" %>
+                    >
+
+                        <!-- Display status icon -->
+                        <% if (day.status === "done") { %>
                             ✅
-                    <% } else if (day.status === "not-done") { %>
+                        <% } else if (day.status === "not-done") { %>
                             ❌
-                    <% } else { %>
+                        <% } else { %>
                             ⚪
-                    <% } %>
-                </button>
+                        <% } %>
 
-            </article>
+                    </button>
 
-        <% }) %>
+                </article>
 
-    </section>
+            <% }) %>
 
-    <footer class="page-footer">
+        </section>
 
-        <button
-            id="save-btn"
-            class="btn btn-primary"
-            disabled>
+        <!-- Save updated habit statuses -->
+        <footer class="page-footer">
 
-            Save Changes
+            <button
+                id="save-btn"
+                class="btn btn-primary"
+                disabled
+            >
+                Save Changes
+            </button>
 
-        </button>
+        </footer>
 
-    </footer>
+    </main>
 
-</main>
     <script src="/js/common.js"></script>
     <script src="/js/weekly.js"></script>
 
 </body>
+
 </html>

@@ -1,13 +1,20 @@
+/* =========================
+   Add Habit Section
+========================= */
 .add-habit-section {
   margin-bottom: 40px;
 }
 
+/* =========================
+   Habit Form
+========================= */
 .habit-form {
   display: flex;
   gap: 15px;
   margin-top: 15px;
 }
 
+/* Input field for adding a new habit */
 .habit-input {
   flex: 1;
   padding: 12px;
@@ -15,16 +22,21 @@
   border-radius: 6px;
 }
 
+/* Highlight input field when focused */
 .habit-input:focus {
   border-color: #2563eb;
 }
 
+/* =========================
+   Habit List
+========================= */
 .habit-list-section {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+/* Individual habit card */
 .habit-card {
   display: flex;
   justify-content: space-between;
@@ -39,17 +51,23 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* Habit title */
 .habit-name {
   font-size: 20px;
 }
 
+/* Message displayed when no habits exist */
 .empty-message {
   text-align: center;
   color: #666;
   padding: 30px;
 }
 
+/* =========================
+   Responsive Design
+========================= */
 @media (max-width: 768px) {
+  /* Stack form elements vertically on smaller screens */
   .habit-form {
     flex-direction: column;
   }
@@ -62,6 +80,7 @@
     width: 100%;
   }
 
+  /* Display habit cards vertically on mobile devices */
   .habit-card {
     flex-direction: column;
     align-items: flex-start;

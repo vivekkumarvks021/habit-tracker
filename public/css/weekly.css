@@ -1,3 +1,8 @@
+/* =========================
+   Navigation
+========================= */
+
+/* Back button to return to the home page */
 .back-btn {
   display: inline-block;
   margin-bottom: 20px;
@@ -9,16 +14,22 @@
   text-decoration: underline;
 }
 
+/* Subtitle displayed below the page heading */
 .section-subtitle {
   color: #666;
   margin-top: 5px;
 }
+
+/* =========================
+   Weekly Habit List
+========================= */
 
 .weekly-list {
   display: flex;
   gap: 15px;
 }
 
+/* Individual day card */
 .day-card {
   display: flex;
   justify-content: space-between;
@@ -29,21 +40,29 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* Container for day name and date */
 .day-details {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
+/* Day name (e.g., Mon, Tue) */
 .day-name {
   font-size: 18px;
 }
 
+/* Formatted date */
 .day-date {
   color: #666;
   font-size: 14px;
 }
 
+/* =========================
+   Status Button
+========================= */
+
+/* Button used to update habit status */
 .status-btn {
   padding: 10px 15px;
   border: none;
@@ -53,27 +72,32 @@
   transition: 0.3s;
 }
 
+/* Footer section containing the Save button */
 .page-footer {
   display: flex;
   justify-content: center;
   margin-top: 30px;
 }
 
+/* Completed habit status */
 .status-done {
   /* background-color: #22c55e; */
   color: #ffffff;
 }
 
+/* Missed habit status */
 .status-not-done {
   /* background-color: #ef4444; */
   color: #ffffff;
 }
 
+/* Default status before any update */
 .status-none {
   /* background-color: #e5e7eb; */
   color: #374151;
 }
 
+/* Disabled Save button */
 .btn:disabled {
   background-color: #cbd5e1;
   color: #64748b;
@@ -81,27 +105,36 @@
   opacity: 0.8;
 }
 
+/* Disable interaction for dates before habit creation */
 .status-disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
+/* Disabled status button */
 .status-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
+/* =========================
+   Responsive Design
+========================= */
+
 @media (max-width: 768px) {
+  /* Stack day card content vertically on mobile */
   .day-card {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
   }
 
+  /* Make status button full width on smaller screens */
   .status-btn {
     width: 100%;
   }
 
+  /* Expand Save button to full width on mobile */
   .page-footer .btn {
     width: 100%;
   }

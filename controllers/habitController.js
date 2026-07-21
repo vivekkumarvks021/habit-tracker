@@ -1,9 +1,12 @@
 const Habit = require("../models/Habits");
 const calculateHabitStats = require("../utils/habitStats");
 
+// Render the home page with all habits and their statistics
 module.exports.home = async (req, res) => {
   try {
     const habits = await Habit.find();
+
+    // Calculate statistics for each habit before rendering
     const habitsWithStats = habits.map((habit) => {
       const stats = calculateHabitStats(habit.history, habit.createdAt);
 
@@ -23,14 +26,17 @@ module.exports.home = async (req, res) => {
   }
 };
 
+// Create a new habit after validating the input
 module.exports.createHabit = async (req, res) => {
   try {
     const { name } = req.body;
 
+    // Prevent empty habit names
     if (!name.trim()) {
       return res.redirect("/?error=habit-required");
     }
 
+    // Prevent duplicate habit creation
     const existingHabit = await Habit.findOne({
       name: name.trim(),
     });
@@ -49,18 +55,18 @@ module.exports.createHabit = async (req, res) => {
   }
 };
 
+// Render the weekly tracking page for a selected habit
 module.exports.showHabit = async (req, res) => {
   try {
     const { id } = req.params;
     const weekData = [];
     const habit = await Habit.findById(id);
 
-    console.log("createdDate", habit.createdAt);
-
     if (!habit) {
       return res.redirect("/");
     }
 
+    // Generate data for the last seven days
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date();
 
@@ -78,6 +84,8 @@ module.exports.showHabit = async (req, res) => {
           month: "short",
         }),
         status: habit.history[fullDate] || "none",
+
+        // Disable dates before the habit was created
         isDisabled: currentDate < habit.createdAt,
       });
     }
@@ -93,6 +101,7 @@ module.exports.showHabit = async (req, res) => {
   }
 };
 
+// Update and save modified habit history
 module.exports.updateHistory = async (req, res) => {
   try {
     const { id } = req.params;
@@ -107,7 +116,7 @@ module.exports.updateHistory = async (req, res) => {
       });
     }
 
-    // Merge updated history
+    // Merge the existing history with newly updated statuses
     habit.history = {
       ...habit.history,
       ...history,
